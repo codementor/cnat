@@ -1,0 +1,20 @@
+# permissions to do viewer ats.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: at-viewer-role
+rules:
+- apiGroups:
+  - cnat.d2iq.com
+  resources:
+  - ats
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - cnat.d2iq.com
+  resources:
+  - ats/status
+  verbs:
+  - get

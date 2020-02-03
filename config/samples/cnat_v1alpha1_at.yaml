@@ -1,0 +1,7 @@
+apiVersion: cnat.d2iq.com/v1alpha1
+kind: At
+metadata:
+  name: at-sample2
+spec:
+  schedule: "2020-01-30T10:02:00Z"
+  command: "echo YAY"

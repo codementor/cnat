@@ -1,0 +1,26 @@
+# permissions to do edit ats.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: at-editor-role
+rules:
+- apiGroups:
+  - cnat.d2iq.com
+  resources:
+  - ats
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cnat.d2iq.com
+  resources:
+  - ats/status
+  verbs:
+  - get
+  - patch
+  - update
