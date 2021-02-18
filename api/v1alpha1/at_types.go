@@ -36,7 +36,7 @@ type AtSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 }
 
-// AtStatus defines the observed state of At
+// AtStatus defines the observed state of At for this lab
 type AtStatus struct {
 	// Phase represents the state of the schedule: until the command is executed
 	// it is PENDING, afterwards it is DONE.

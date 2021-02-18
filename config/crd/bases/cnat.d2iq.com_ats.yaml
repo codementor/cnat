@@ -1,20 +1,13 @@
 
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.2.4
+    controller-gen.kubebuilder.io/version: v0.4.1
   creationTimestamp: null
   name: ats.cnat.d2iq.com
 spec:
-  additionalPrinterColumns:
-  - JSONPath: .spec.schedule
-    name: Schedule
-    type: string
-  - JSONPath: .status.phase
-    name: Phase
-    type: string
   group: cnat.d2iq.com
   names:
     kind: At
@@ -22,50 +15,49 @@ spec:
     plural: ats
     singular: at
   scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      description: At is the Schema for the ats API
-      properties:
-        apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
-            of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-          type: string
-        kind:
-          description: 'Kind is a string value representing the REST resource this
-            object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-          type: string
-        metadata:
-          type: object
-        spec:
-          description: AtSpec defines the desired state of At
-          properties:
-            command:
-              description: Command is the desired command (executed in a Bash shell)
-                to be executed.
-              type: string
-            schedule:
-              description: 'Schedule is the desired time the command is supposed to
-                be executed. Note: the format used here is UTC time https://www.utctime.net'
-              type: string
-          type: object
-        status:
-          description: AtStatus defines the observed state of At
-          properties:
-            phase:
-              description: 'Phase represents the state of the schedule: until the
-                command is executed it is PENDING, afterwards it is DONE.'
-              type: string
-          type: object
-      type: object
-  version: v1alpha1
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - jsonPath: .spec.schedule
+      name: Schedule
+      type: string
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: At is the Schema for the ats API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: AtSpec defines the desired state of At
+            properties:
+              command:
+                description: Command is the desired command (executed in a Bash shell) to be executed.
+                type: string
+              schedule:
+                description: 'Schedule is the desired time the command is supposed to be executed. Note: the format used here is UTC time https://www.utctime.net'
+                type: string
+            type: object
+          status:
+            description: AtStatus defines the observed state of At for this lab
+            properties:
+              phase:
+                description: 'Phase represents the state of the schedule: until the command is executed it is PENDING, afterwards it is DONE.'
+                type: string
+            type: object
+        type: object
     served: true
     storage: true
+    subresources:
+      status: {}
 status:
   acceptedNames:
     kind: ""
